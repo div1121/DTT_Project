@@ -10,7 +10,7 @@ app = Flask(__name__)
  
 UPLOAD_FOLDER = os.path.join(os.getcwd(),"static/uploads")
 
-best_model = tf.keras.models.load_model( os.path.join(os.getcwd(),"static/fune_model.08-1.00.h5"))
+# best_model = tf.keras.models.load_model( os.path.join(os.getcwd(),"static/fune_model.08-1.00.h5"))
 folders = ['freshapples', 'freshbanana', 'freshoranges', 'rottenapples', 'rottenbanana', 'rottenoranges']
  
 app.secret_key = "secret key"
@@ -45,10 +45,10 @@ def upload_image():
         test_image = image.load_img(filepath, target_size=(256,256))
         test_image = image.img_to_array(test_image)
         test_image = np.expand_dims(test_image, axis=0)
-        result = best_model.predict(test_image)
-        p = np.argmax(result[0])
-        prediction = folders[p]
-        # prediction = "temp"
+        # result = best_model.predict(test_image)
+        # p = np.argmax(result[0])
+        # prediction = folders[p]
+        prediction = "temp"
         flash('Image successfully uploaded and displayed below')
         return render_template('index.html', filename=filename, prediction=prediction)
     else:
