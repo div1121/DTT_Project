@@ -1,2 +1,4 @@
 # DTT_Project
- DTT Project
+DTT Project: CV
+
+Deployment: https://dttproject.herokuapp.com/
