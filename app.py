@@ -1,4 +1,4 @@
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 import urllib.request
 import os
 from werkzeug.utils import secure_filename
@@ -8,9 +8,9 @@ import numpy as np
 
 app = Flask(__name__)
  
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = os.join(os.getcwd(),"static/uploads")
 
-best_model = tf.keras.models.load_model('static/fune_model.08-1.00.h5')
+best_model = tf.keras.models.load_model( os.join(os.getcwd(),"static/fune_model.08-1.00.h5"))
 folders = ['freshapples', 'freshbanana', 'freshoranges', 'rottenapples', 'rottenbanana', 'rottenoranges']
  
 app.secret_key = "secret key"
@@ -58,7 +58,7 @@ def upload_image():
 @app.route('/display/<filename>')
 def display_image(filename):
     #print('display_image filename: ' + filename)
-    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+    return send_from_directory(app.config["IMAGE_UPLOADS"], filename)
  
 if __name__ == "__main__":
     app.run(threaded=True)
