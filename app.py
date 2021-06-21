@@ -8,9 +8,9 @@ import numpy as np
 
 app = Flask(__name__)
  
-UPLOAD_FOLDER = os.join(os.getcwd(),"static/uploads")
+UPLOAD_FOLDER = os.path.join(os.getcwd(),"static/uploads")
 
-best_model = tf.keras.models.load_model( os.join(os.getcwd(),"static/fune_model.08-1.00.h5"))
+best_model = tf.keras.models.load_model( os.path.join(os.getcwd(),"static/fune_model.08-1.00.h5"))
 folders = ['freshapples', 'freshbanana', 'freshoranges', 'rottenapples', 'rottenbanana', 'rottenoranges']
  
 app.secret_key = "secret key"
@@ -58,7 +58,7 @@ def upload_image():
 @app.route('/display/<filename>')
 def display_image(filename):
     #print('display_image filename: ' + filename)
-    return send_from_directory(app.config["IMAGE_UPLOADS"], filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
  
 if __name__ == "__main__":
     app.run(threaded=True)
