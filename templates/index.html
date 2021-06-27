@@ -22,16 +22,20 @@
     </p>
     {% if filename %}
         <div>
-            <img style='height: 100%; width: 100%; object-fit: contain' src="{{ url_for('display_image', filename=filename) }}">
+            <img style='display: block;margin-left: auto;margin-right: auto; width: 50%;' src="{{ url_for('display_image', filename=filename) }}">
         </div>
         {% if prediction %}
-        <p>Prediction of photo: {{ prediction }}</p>
+        <h4 style="text-align: center;">Prediction of Photo:</h4>
+        <h4 style="text-align: center;">{{prediction}}</h4>
         {% endif %}
+        {% if confidence %}
+        <h4 style="text-align: center;">Confidence on Prediction: {{confidence}}%</h4>
+        {% endif %}    
     {% endif %}
     <form method="post" action="/" enctype="multipart/form-data">
         <dl>
             <p>
-                <input type="file" name="file" class="form-control" autocomplete="off" required>
+                <input type="file" name="file" class="form-control" accept="image/*" autocomplete="off" required capture>
             </p>
         </dl>
         <p>
